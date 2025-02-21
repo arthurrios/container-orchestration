@@ -1,36 +1,36 @@
-# Projeto com Docker e Docker Compose
+# Project with Docker and Docker Compose
 
-Este repositório contém uma aplicação Node.js conectada a um banco de dados MySQL, configurada usando Docker e Docker Compose. O projeto segue boas práticas, como o uso de variáveis de ambiente, volumes para persistência de dados, redes customizadas e múltiplos estágios no Dockerfile.
+This repository contains a Node.js application connected to a MySQL database, configured using Docker and Docker Compose. The project follows best practices, such as the use of environment variables, volumes for data persistence, custom networks, and multi-stage builds in the Dockerfile.
 
-## Visão Geral do Projeto
+## Project Overview
 
-Este projeto consiste em uma API Node.js conectada a um banco de dados MySQL. A aplicação foi desenvolvida com foco em boas práticas de containerização, utilizando Docker e Docker Compose para garantir facilidade de configuração, escalabilidade e segurança.
+This project consists of a Node.js API connected to a MySQL database. The application was developed with a focus on containerization best practices, using Docker and Docker Compose to ensure ease of configuration, scalability, and security.
 
-## Pré-requisitos
+## Prerequisites
 
-- Docker instalado: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
-- Docker Compose instalado: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+- Docker installed: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+- Docker Compose installed: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 
-## Estrutura do Projeto
+## Project Structure
 
-- **Dockerfile**: Define a construção da imagem da aplicação Node.js.
-- **docker-compose.yaml**: Configura os serviços da aplicação e do banco de dados.
-- **.env**: Armazena variáveis de ambiente para configuração segura.
+- **Dockerfile**: Defines the build process for the Node.js application image.
+- **docker-compose.yaml**: Configures the application and database services.
+- **.env**: Stores environment variables for secure configuration.
 
-## Configuração
+## Configuration
 
-### 1. Clone o Repositório
+### 1. Clone the Repository
 
-Clone este repositório para sua máquina local:
+Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
 ```
 
-### 2. Crie o Arquivo `.env`
+### 2. Create the `.env` File
 
-Crie um arquivo `.env` na raiz do projeto com base no exemplo abaixo. Certifique-se de substituir os valores conforme necessário.
+Create a `.env` file in the root of the project based on the example below. Make sure to replace the values as needed.
 
 ```env
 # MySQL Configuration
@@ -44,72 +44,72 @@ MYSQL_PORT=3306
 API_PORT=3001
 ```
 
-**Importante:** Adicione o arquivo `.env` ao `.gitignore` para evitar que informações sensíveis sejam expostas.
+**Important:** Add the `.env` file to `.gitignore` to prevent sensitive information from being exposed.
 
-### Segurança
+### Security
 
-- O usuário `root` do MySQL é protegido com uma senha forte.
-- Um usuário específico (`admin`) foi criado para a aplicação, com permissões limitadas.
-- Variáveis de ambiente são usadas para gerenciar configurações sensíveis, evitando hardcoding no código.
+- The MySQL `root` user is protected with a strong password.
+- A specific user (`admin`) was created for the application, with limited permissions.
+- Environment variables are used to manage sensitive configurations, avoiding hardcoding in the code.
 
-### 3. Construa e Inicie os Containers
+### 3. Build and Start the Containers
 
-Execute o seguinte comando para construir as imagens e iniciar os containers:
+Run the following command to build the images and start the containers:
 
 ```bash
 docker-compose up --build
 ```
 
-Para executar os containers em segundo plano:
+To run the containers in the background:
 
 ```bash
 docker-compose up -d
 ```
 
-### 4. Parar os Containers
+### 4. Stop the Containers
 
-Para parar os containers:
+To stop the containers:
 
 ```bash
 docker-compose down
 ```
 
-## Testando a Conexão
+## Testing the Connection
 
 ### API
 
-A API estará disponível em `http://localhost:3001`. Você pode testar a conexão usando ferramentas como Postman ou cURL.
+The API will be available at `http://localhost:3001`. You can test the connection using tools like Postman or cURL.
 
-Exemplo de requisição usando cURL:
+Example request using cURL:
 
 ```bash
 curl http://localhost:3001
 ```
 
-### Banco de Dados
+### Database
 
-O banco de dados MySQL estará acessível na porta `3306`. Você pode conectar-se ao banco de dados usando clientes como MySQL Workbench ou o comando `mysql`:
+The MySQL database will be accessible on port `3306`. You can connect to the database using clients like MySQL Workbench or the `mysql` command:
 
 ```bash
 mysql -h 127.0.0.1 -P 3306 -u admin -p
 ```
 
-Insira a senha definida no arquivo `.env` quando solicitado.
+Enter the password defined in the `.env` file when prompted.
 
-## Persistência de Dados
+## Data Persistence
 
-Os dados do banco de dados são persistidos usando volumes Docker. Isso garante que os dados não sejam perdidos ao reiniciar os containers. O volume é definido no arquivo `docker-compose.yaml`:
+Database data is persisted using Docker volumes. This ensures that data is not lost when restarting the containers. The volume is defined in the `docker-compose.yaml` file:
 
 ```yaml
 volumes:
   db:
 ```
 
-## Contribuição
+## Contribution
 
-Contribuições são bem-vindas! Abra uma issue ou envie um pull request para melhorar este projeto.
+Contributions are welcome! Open an issue or submit a pull request to improve this project.
 
-## Estrutura dos Arquivos
+## File Structure
 
 ### Dockerfile
 
@@ -152,7 +152,6 @@ services:
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     networks:
       - first-network
-
   api-rocket:
     build:
       context: .
@@ -169,16 +168,14 @@ services:
       - mysql
     networks:
       - first-network
-
 networks:
   first-network:
     driver: bridge
-
 volumes:
   db:
 ```
 
-### .env (Exemplo)
+### .env (Example)
 
 ```env
 # MySQL Configuration
@@ -192,6 +189,6 @@ MYSQL_PORT=3306
 API_PORT=3001
 ```
 
-## Conclusão
+## Conclusion
 
-Este arquivo `README.md` inclui todas as etapas necessárias para configurar, executar e testar o projeto. Ele também fornece exemplos claros de comandos e explicações sobre o uso de variáveis de ambiente, volumes e redes personalizadas.
+This `README.md` file includes all the necessary steps to configure, run, and test the project. It also provides clear examples of commands and explanations regarding the use of environment variables, volumes, and custom networks.
